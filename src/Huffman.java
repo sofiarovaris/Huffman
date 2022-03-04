@@ -1,12 +1,15 @@
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Scanner;
 
 public class Huffman {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		
+		long tempoInicial = System.currentTimeMillis();
 		int opcao;
 		Scanner ler = new Scanner(System.in);
+		Compactar compactar = new Compactar();
 		
 		System.out.println("Nome do arquivo");
 		Arquivo arquivo = new Arquivo(ler.nextLine());
@@ -21,8 +24,13 @@ public class Huffman {
 		
 		switch (opcao) {
 		case 1: 
-			 Fila fila = arquivo.lerArquivoCaracter();
-			 fila.imprimeFila();
+			Queue<ArvoreBinaria> fila = arquivo.lerArquivoCaracter();
+			 ArvoreBinaria r = compactar.huffman(fila);
+			 /*System.out.println("DEPOIS:");
+			 for (ArvoreBinaria arvoreBinaria : fila) {
+					System.out.println("Caracter: "+arvoreBinaria.getInfo()+" Frequência: "+arvoreBinaria.getFreq());
+				}*/
+			 r.inOrdem();
 			break;
 		case 2: 
 					
@@ -36,6 +44,7 @@ public class Huffman {
 		default:
 			throw new IllegalArgumentException("Opção inválida!");
 		}
+		System.out.println("tempo:"+( (float) (System.currentTimeMillis() - tempoInicial)/60000));
 	}
 
 }
