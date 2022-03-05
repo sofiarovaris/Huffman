@@ -1,15 +1,17 @@
-import java.util.LinkedList;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Queue;
 import java.util.Scanner;
 
 public class Huffman {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws FileNotFoundException, IOException, ClassNotFoundException{
 		// TODO Auto-generated method stub
 		long tempoInicial = System.currentTimeMillis();
 		int opcao;
 		Scanner ler = new Scanner(System.in);
 		Compactar compactar = new Compactar();
+		Descompactar descompactar = new Descompactar();
 		
 		System.out.println("Nome do arquivo");
 		Arquivo arquivo = new Arquivo(ler.nextLine());
@@ -25,15 +27,18 @@ public class Huffman {
 		switch (opcao) {
 		case 1: 
 			Queue<ArvoreBinaria> fila = arquivo.lerArquivoCaracter();
-			 ArvoreBinaria r = compactar.huffman(fila);
+			 ArvoreBinaria r = compactar.criarArvore(fila);
 			 /*System.out.println("DEPOIS:");
 			 for (ArvoreBinaria arvoreBinaria : fila) {
 					System.out.println("Caracter: "+arvoreBinaria.getInfo()+" Frequência: "+arvoreBinaria.getFreq());
 				}*/
-			 r.inOrdem();
+			 //r.inOrdem();
+			 //System.out.println();
+			 //arquivo.guardarArquivoArvore(r);
+			compactar.compactarArquivo(r, arquivo.getNomeArquivo());
 			break;
 		case 2: 
-					
+			descompactar.descompactarArquivo(arquivo.getNomeArquivo());
 			break;
 		case 3: 
 			

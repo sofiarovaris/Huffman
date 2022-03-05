@@ -1,5 +1,8 @@
+import java.io.Serializable;
+import java.util.ArrayList;
 
-public class ArvoreBinaria implements Comparable<ArvoreBinaria>{
+public class ArvoreBinaria implements Comparable<ArvoreBinaria>, Serializable{
+	private static final long serialVersionUID = 1L;
 	private String info;
 	private int freq;
 	private ArvoreBinaria esq;
@@ -82,5 +85,22 @@ public class ArvoreBinaria implements Comparable<ArvoreBinaria>{
 			return -1;
 		}
 		return 1;
+	}
+
+	public void gerarListaBits(ArrayList<CodigoBits> codigos, String codigo) {
+		// TODO Auto-generated method stub
+		if(this.esq != null) {
+			this.esq.gerarListaBits(codigos, codigo+"0");
+		}
+		if(this.info != null) {
+			CodigoBits cb = new CodigoBits();
+			cb.setInfo(this.info);
+			cb.setCodigo(codigo);
+			codigos.add(cb);
+		}
+		if(this.dir != null) {
+			this.dir.gerarListaBits(codigos, codigo+"1");
+		}
+		
 	}
 }
