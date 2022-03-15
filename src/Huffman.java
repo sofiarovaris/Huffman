@@ -23,11 +23,14 @@ public class Huffman {
 		opcao = ler.nextInt();
 		
 		ler.close();
+		Queue<ArvoreBinaria> fila;
+		ArvoreBinaria r;
+		
 		
 		switch (opcao) {
 		case 1: 
-			Queue<ArvoreBinaria> fila = arquivo.lerArquivoCaracter();
-			 ArvoreBinaria r = compactar.criarArvore(fila);
+			 fila = arquivo.lerArquivoCaracter();
+			 r = compactar.criarArvore(fila);
 			 /*System.out.println("DEPOIS:");
 			 for (ArvoreBinaria arvoreBinaria : fila) {
 					System.out.println("Caracter: "+arvoreBinaria.getInfo()+" Frequência: "+arvoreBinaria.getFreq());
@@ -41,7 +44,16 @@ public class Huffman {
 			descompactar.descompactarArquivo(arquivo.getNomeArquivo());
 			break;
 		case 3: 
-			
+			 fila = arquivo.lerArquivoPalavra();
+			 /*System.out.println("DEPOIS:");
+			 for (ArvoreBinaria arvoreBinaria : fila) {
+					System.out.println("Caracter: "+arvoreBinaria.getInfo()+" Frequência: "+arvoreBinaria.getFreq());
+			 }*/
+			 r = compactar.criarArvore(fila);
+			 r.inOrdem();
+			 //System.out.println();
+			 arquivo.guardarArquivoArvore(r);
+			 r = compactar.criarArvore(fila);
 			break;
 		case 4: 
 			
