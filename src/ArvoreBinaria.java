@@ -1,5 +1,6 @@
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class ArvoreBinaria implements Comparable<ArvoreBinaria>, Serializable{
 	private static final long serialVersionUID = 1L;
@@ -103,4 +104,20 @@ public class ArvoreBinaria implements Comparable<ArvoreBinaria>, Serializable{
 		}
 		
 	}
+	/*
+	public void gerarTabelaHashCodigos(HashMap<ArvoreBinaria, String> tabelaHash, String codigo) {
+		if(this.esq != null) {
+			this.esq.gerarTabelaHashCodigos(tabelaHash, codigo+"0");
+		}
+		if(this.info != null) {
+			CodigoBits cb = new CodigoBits();
+			cb.setInfo(this.info);
+			cb.setCodigo(codigo);
+			tabelaHash.put(this.freq, cb);
+		}
+		if(this.dir != null) {
+			this.dir.gerarTabelaHashCodigos(tabelaHash, codigo+"1");
+		}
+		
+	}*/
 }

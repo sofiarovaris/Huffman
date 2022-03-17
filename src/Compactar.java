@@ -9,12 +9,13 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.BitSet;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Queue;
 
 public class Compactar {
 
-	public ArvoreBinaria criarArvore(Queue<ArvoreBinaria> fila) {
+	public ArvoreBinaria criaFilaArvore(Queue<ArvoreBinaria> fila) {
 		// TODO Auto-generated method stub
 		while(fila.size()>1) {
 			ArvoreBinaria x = fila.element();
@@ -29,22 +30,20 @@ public class Compactar {
 	}
 
 	public void compactarArquivo(ArvoreBinaria r, String nomeArquivo) throws FileNotFoundException, IOException {
-		// TODO Auto-generated method stub
-		File arq = new File("compactado.bin");
+		File arq = new File(nomeArquivo);
 		ObjectOutputStream o = new ObjectOutputStream(new FileOutputStream(arq));
 		try {
 	        arq.delete();
 	        arq.createNewFile();
 			o.writeObject(r);			
 		}catch(IOException erro) {
-				System.out.println("Erro: "+erro.getMessage());
-	     }
-		
+			System.out.println("Erro: "+erro.getMessage());
+	    }
+		HashMap<Integer, CodigoBits> tabelaHash = new HashMap<Integer, CodigoBits>();
+		//HashMap<int, CodigoBits> tabelaHash = new HashMap<int, CodigoBits>();
 		ArrayList<CodigoBits> codigos = new ArrayList<>();
 		r.gerarListaBits(codigos,"");
-		/*for (CodigoBits codigoBits : codigos) {
-			System.out.println("caracter: "+codigoBits.getInfo()+" codigo: "+codigoBits.getCodigo());
-		}*/
+		//r.gerarTabelaHashCodigos(tabelaHash, "");
 		BitSet b = new BitSet();
 		try {
 			int n = 0;
@@ -52,9 +51,7 @@ public class Compactar {
 			int c = lerArq.read();
 			Character aux = (char) c;
 	        while (c != -1) {
-	        	//System.out.print(String.valueOf((char) c));
 	        	for (CodigoBits codigoBits : codigos) {
-	        		//System.out.println("getInfo: "+codigoBits.getInfo()+" aux: "+aux.toString());
 					if(codigoBits.getInfo().equals(aux.toString())){
 						for(int i=0; i<codigoBits.getCodigo().length(); i++) {
 							if(codigoBits.getCodigo().charAt(i) == '0') {
@@ -70,20 +67,13 @@ public class Compactar {
 	        }
 	        b.set(n, true);
 	        lerArq.close();
-	        /*for(int i=0; i<b.length(); i++) {
-				if(b.get(i) == true) {
-					System.out.print(1);
-				}else {
-					System.out.print(0);
-				}
-			}*/
 	    }catch (IOException e) {}
 		try {
 			o.write(b.toByteArray());
 			o.close();
 		}catch(IOException erro) {
-				System.out.println("Erro: "+erro.getMessage());
-	     }
+			System.out.println("Erro: "+erro.getMessage());
+		}
 	}
 	
 	

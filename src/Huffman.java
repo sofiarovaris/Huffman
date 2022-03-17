@@ -29,34 +29,53 @@ public class Huffman {
 		
 		switch (opcao) {
 		case 1: 
-			 fila = arquivo.lerArquivoCaracter();
-			 r = compactar.criarArvore(fila);
-			 /*System.out.println("DEPOIS:");
-			 for (ArvoreBinaria arvoreBinaria : fila) {
-					System.out.println("Caracter: "+arvoreBinaria.getInfo()+" Frequência: "+arvoreBinaria.getFreq());
-				}*/
-			 //r.inOrdem();
-			 //System.out.println();
-			 //arquivo.guardarArquivoArvore(r);
+			System.out.println("Lendo caracteres...");
+			fila = arquivo.leArquivoCaracter(); //otimizado
+			System.out.println("tempo:"+( (float) (System.currentTimeMillis() - tempoInicial)/60000));
+			
+			System.out.println("Criando Fila de nós...");
+			r = compactar.criaFilaArvore(fila); //ok
+			System.out.println("tempo:"+( (float) (System.currentTimeMillis() - tempoInicial)/60000));
+			
+			System.out.println("Compactando...");
 			compactar.compactarArquivo(r, arquivo.getNomeArquivo());
+			System.out.println("tempo:"+( (float) (System.currentTimeMillis() - tempoInicial)/60000));
+			
+			
+			/*System.out.println("DEPOIS:");
+			for (ArvoreBinaria arvoreBinaria : fila) {
+				System.out.println("Caracter: "+arvoreBinaria.getInfo()+" Frequência: "+arvoreBinaria.getFreq());
+			}*/
+			//r.inOrdem();
+			//System.out.println();
+			//arquivo.guardarArquivoArvore(r);
+			
 			break;
 		case 2: 
 			descompactar.descompactarArquivo(arquivo.getNomeArquivo());
 			break;
 		case 3: 
+			System.out.println("Lendo palavras...");
 			 fila = arquivo.lerArquivoPalavra();
+			 System.out.println("tempo:"+( (float) (System.currentTimeMillis() - tempoInicial)/60000));
+			 
 			 /*System.out.println("DEPOIS:");
 			 for (ArvoreBinaria arvoreBinaria : fila) {
 					System.out.println("Caracter: "+arvoreBinaria.getInfo()+" Frequência: "+arvoreBinaria.getFreq());
 			 }*/
-			 r = compactar.criarArvore(fila);
-			 r.inOrdem();
+			 System.out.println("Criando árvore...");
+			 //r = compactar.criarArvore(fila);
+			 System.out.println("tempo:"+( (float) (System.currentTimeMillis() - tempoInicial)/60000));
+			 //r.inOrdem();
 			 //System.out.println();
-			 arquivo.guardarArquivoArvore(r);
-			 r = compactar.criarArvore(fila);
+			 //arquivo.guardarArquivoArvore(r);
+			 //r = compactar.criarArvore(fila);
+			 System.out.println("Compactando...");
+			 //compactar.compactarArquivo(r, arquivo.getNomeArquivo());
+			 System.out.println("tempo:"+( (float) (System.currentTimeMillis() - tempoInicial)/60000));
 			break;
 		case 4: 
-			
+			descompactar.descompactarArquivo(arquivo.getNomeArquivo());
 			break;
 		default:
 			throw new IllegalArgumentException("Opção inválida!");
