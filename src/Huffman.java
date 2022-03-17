@@ -30,23 +30,23 @@ public class Huffman {
 		switch (opcao) {
 		case 1: 
 			tempoInicial = System.currentTimeMillis();
-			System.out.println("Lendo caracteres...");
+			//System.out.println("Lendo caracteres...");
 			fila = arquivo.leArquivoCaracter(); //otimizado
-			System.out.println("tempo:"+( (float) (System.currentTimeMillis() - tempoInicial)/60000));
+			//System.out.println("tempo:"+( (float) (System.currentTimeMillis() - tempoInicial)/60000));
 			
-			System.out.println("Criando Fila de nós...");
+			//System.out.println("Criando Fila de nós...");
 			r = compactar.criaFilaArvore(fila); //ok
-			System.out.println("tempo:"+( (float) (System.currentTimeMillis() - tempoInicial)/60000));
+			//System.out.println("tempo:"+( (float) (System.currentTimeMillis() - tempoInicial)/60000));
 			
-			System.out.println("Compactando..."); //ok
+			//System.out.println("Compactando..."); //ok
 			compactar.compactarArquivo(r, arquivo.getNomeArquivo());
-			System.out.println("tempo:"+( (float) (System.currentTimeMillis() - tempoInicial)/60000));
+			//System.out.println("tempo:"+( (float) (System.currentTimeMillis() - tempoInicial)/60000));
 			break;
 		case 2: 
 			tempoInicial = System.currentTimeMillis();
-			System.out.println("Descompactando...");
+			//System.out.println("Descompactando...");
 			descompactar.descompactarArquivo(arquivo.getNomeArquivo());
-			System.out.println("tempo:"+( (float) (System.currentTimeMillis() - tempoInicial)/60000));
+			//System.out.println("tempo:"+( (float) (System.currentTimeMillis() - tempoInicial)/60000));
 			break;
 		case 3: 
 			System.out.println("Lendo palavras...");

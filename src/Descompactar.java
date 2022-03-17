@@ -27,16 +27,17 @@ public class Descompactar {
 
 				r.gerarTabelaHashCodigos(tabelaHash, "", 2);
 	
-				String codigo="";
+				StringBuilder codigo = new StringBuilder();
 				for(int i=0; i<b.length(); i++) {
 					if(b.get(i) == true) {
-						codigo = codigo + "1";
+						codigo.append(1);
 					}else {
-						codigo = codigo + "0";
+						codigo.append(0);
 					}
-					if(tabelaHash.get(codigo) != null) {
-						fw.write(tabelaHash.get(codigo));
-						codigo = "";
+					if(tabelaHash.get(codigo.toString()) != null) {
+						//System.out.println(tabelaHash.get(codigo.toString()));
+						fw.write(tabelaHash.get(codigo.toString()));
+						codigo.delete(0, codigo.length());
 					}
 				}
 				fw.close();
