@@ -7,7 +7,7 @@ public class Huffman {
 
 	public static void main(String[] args) throws FileNotFoundException, IOException, ClassNotFoundException{
 		// TODO Auto-generated method stub
-		long tempoInicial = System.currentTimeMillis();
+		long tempoInicial = 0;
 		int opcao;
 		Scanner ler = new Scanner(System.in);
 		Compactar compactar = new Compactar();
@@ -29,6 +29,7 @@ public class Huffman {
 		
 		switch (opcao) {
 		case 1: 
+			tempoInicial = System.currentTimeMillis();
 			System.out.println("Lendo caracteres...");
 			fila = arquivo.leArquivoCaracter(); //otimizado
 			System.out.println("tempo:"+( (float) (System.currentTimeMillis() - tempoInicial)/60000));
@@ -37,22 +38,15 @@ public class Huffman {
 			r = compactar.criaFilaArvore(fila); //ok
 			System.out.println("tempo:"+( (float) (System.currentTimeMillis() - tempoInicial)/60000));
 			
-			System.out.println("Compactando...");
+			System.out.println("Compactando..."); //ok
 			compactar.compactarArquivo(r, arquivo.getNomeArquivo());
 			System.out.println("tempo:"+( (float) (System.currentTimeMillis() - tempoInicial)/60000));
-			
-			
-			/*System.out.println("DEPOIS:");
-			for (ArvoreBinaria arvoreBinaria : fila) {
-				System.out.println("Caracter: "+arvoreBinaria.getInfo()+" Frequência: "+arvoreBinaria.getFreq());
-			}*/
-			//r.inOrdem();
-			//System.out.println();
-			//arquivo.guardarArquivoArvore(r);
-			
 			break;
 		case 2: 
+			tempoInicial = System.currentTimeMillis();
+			System.out.println("Descompactando...");
 			descompactar.descompactarArquivo(arquivo.getNomeArquivo());
+			System.out.println("tempo:"+( (float) (System.currentTimeMillis() - tempoInicial)/60000));
 			break;
 		case 3: 
 			System.out.println("Lendo palavras...");

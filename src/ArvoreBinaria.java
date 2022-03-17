@@ -120,4 +120,20 @@ public class ArvoreBinaria implements Comparable<ArvoreBinaria>, Serializable{
 		}
 		
 	}*/
+
+	public void gerarTabelaHashCodigos(HashMap<String, String> tabelaHash, String codigo, int opcao) {
+		if(this.esq != null) {
+			this.esq.gerarTabelaHashCodigos(tabelaHash, codigo+"0", opcao);
+		}
+		if(this.info != null) {
+			if(opcao==1) {
+				tabelaHash.put(this.info, codigo);
+			}else {
+				tabelaHash.put(codigo, this.info);
+			}
+		}
+		if(this.dir != null) {
+			this.dir.gerarTabelaHashCodigos(tabelaHash, codigo+"1", opcao);
+		}
+	}
 }
