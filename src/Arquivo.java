@@ -28,10 +28,7 @@ public class Arquivo {
 	        BufferedReader lerArq = new BufferedReader(new InputStreamReader(new FileInputStream(this.nomeArquivo),"UTF-8"));
 			int c = lerArq.read();
 	        while (c != -1) {
-	        	if(fila.isEmpty() || !buscaPalavraLista(fila, String.valueOf((char) c))) {
-	        		ArvoreBinaria r = new ArvoreBinaria(String.valueOf((char) c), 1);
-		       		fila.add(r);
-	        	}
+	        	adicionaNoFila(fila, String.valueOf((char) c));
 	        	c = lerArq.read();
 	        }
 	        lerArq.close();
@@ -40,6 +37,13 @@ public class Arquivo {
 		return fila;
 	}
 	
+	public void adicionaNoFila(Queue<ArvoreBinaria> fila, String palavra) {
+		if(fila.isEmpty() || !buscaPalavraLista(fila, palavra)) {
+    		ArvoreBinaria r = new ArvoreBinaria(palavra, 1);
+       		fila.add(r);
+    	}
+	}
+
 	public boolean buscaPalavraLista(Queue<ArvoreBinaria> fila, String palavra) {
 		for (ArvoreBinaria arvoreBinaria : fila) {
 			if(arvoreBinaria.getInfo().equals(palavra)){
@@ -49,12 +53,13 @@ public class Arquivo {
 		}
 		return false;
 	}
+	
+	
 
 	public Queue<ArvoreBinaria> lerArquivoPalavra() {
-		// TODO Auto-generated method stub
 		Queue<ArvoreBinaria> fila = new LinkedList<>();
+		StringBuilder palavra = new StringBuilder();
 	    try {
-	    	StringBuilder palavra = new StringBuilder();
 	        BufferedReader lerArq = new BufferedReader(new InputStreamReader(new FileInputStream(this.nomeArquivo),"UTF-8"));
 			int c = lerArq.read();
 	        while (c != -1) {
@@ -62,48 +67,14 @@ public class Arquivo {
 	        		palavra.append((char) c);
 	        		c = lerArq.read();
 	        	}
-	        	if(palavra.equals("")) {
-	        		palavra.append((char) c);
-	        		//|| (c==128) || (c==130) || (c==131) || (c==133) || (c==135) || (c==136) || (c==144) || (c==147) || (c==160) || (c==161) || (c==162) || (c==163) || (c==181) || (c==182) || (c==183) || (c==198) || (c==199) || (c==210) || (c==214) || (c==224) || (c==228) || (c==233) || (c==234)
-	        	}else if(!(Character.isLetterOrDigit(c))) {
-	        		//System.out.println("Palavra: "+palavra);
-		        	if(fila.isEmpty()) {
-				        ArvoreBinaria r = new ArvoreBinaria(palavra.toString(), 1);
-				        fila.add(r);
-				    }else {
-				        loop:{
-				        	for (ArvoreBinaria arvoreBinaria : fila) {
-								if(arvoreBinaria.getInfo().equals(palavra)){
-									arvoreBinaria.setFreq(arvoreBinaria.getFreq()+1);
-									break loop;
-								}
-							}
-					       	ArvoreBinaria r = new ArvoreBinaria(palavra.toString(), 1);
-					       	fila.add(r);
-				        }
-				    }
-		        	palavra.delete(0, palavra.length());
-		        	palavra.append((char) c);
-	        	}
-	        	//System.out.println("Palavra: "+palavra);
-	        	if(fila.isEmpty()) {
-			        ArvoreBinaria r = new ArvoreBinaria(palavra.toString(), 1);
-			        fila.add(r);
-			    }else {
-			        loop:{
-			        	for (ArvoreBinaria arvoreBinaria : fila) {
-							if(arvoreBinaria.getInfo().equals(palavra)){
-								arvoreBinaria.setFreq(arvoreBinaria.getFreq()+1);
-								break loop;
-							}
-						}
-				       	ArvoreBinaria r = new ArvoreBinaria(palavra.toString(), 1);
-				       	fila.add(r);
-			        }
-			    }
+	        	adicionaNoFila(fila, palavra.toString());
+	        	palavra.delete(0, palavra.length());
+	        	
+	        	palavra.append((char) c);
+	        	adicionaNoFila(fila, palavra.toString());
+	        	palavra.delete(0, palavra.length());
 	        	
 	        	c = lerArq.read();
-	        	palavra.delete(0, palavra.length());
 	        }
 	        lerArq.close();
 	    }catch (IOException e) {}

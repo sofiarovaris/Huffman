@@ -39,7 +39,7 @@ public class Huffman {
 			//System.out.println("tempo:"+( (float) (System.currentTimeMillis() - tempoInicial)/60000));
 			
 			//System.out.println("Compactando..."); //ok
-			compactar.compactarArquivo(r, arquivo.getNomeArquivo());
+			compactar.compactarArquivoCaracter(r, arquivo.getNomeArquivo());
 			//System.out.println("tempo:"+( (float) (System.currentTimeMillis() - tempoInicial)/60000));
 			break;
 		case 2: 
@@ -49,24 +49,25 @@ public class Huffman {
 			//System.out.println("tempo:"+( (float) (System.currentTimeMillis() - tempoInicial)/60000));
 			break;
 		case 3: 
+			tempoInicial = System.currentTimeMillis();
 			System.out.println("Lendo palavras...");
-			 fila = arquivo.lerArquivoPalavra();
-			 System.out.println("tempo:"+( (float) (System.currentTimeMillis() - tempoInicial)/60000));
+			fila = arquivo.lerArquivoPalavra();
+			System.out.println("tempo:"+( (float) (System.currentTimeMillis() - tempoInicial)/60000));
 			 
-			 /*System.out.println("DEPOIS:");
-			 for (ArvoreBinaria arvoreBinaria : fila) {
-					System.out.println("Caracter: "+arvoreBinaria.getInfo()+" Frequência: "+arvoreBinaria.getFreq());
-			 }*/
-			 System.out.println("Criando árvore...");
-			 //r = compactar.criarArvore(fila);
-			 System.out.println("tempo:"+( (float) (System.currentTimeMillis() - tempoInicial)/60000));
-			 //r.inOrdem();
-			 //System.out.println();
-			 //arquivo.guardarArquivoArvore(r);
-			 //r = compactar.criarArvore(fila);
-			 System.out.println("Compactando...");
-			 //compactar.compactarArquivo(r, arquivo.getNomeArquivo());
-			 System.out.println("tempo:"+( (float) (System.currentTimeMillis() - tempoInicial)/60000));
+			/*System.out.println("DEPOIS:");
+			for (ArvoreBinaria arvoreBinaria : fila) {
+				System.out.println("Caracter: "+arvoreBinaria.getInfo()+" Frequência: "+arvoreBinaria.getFreq());
+			}*/
+			System.out.println("Criando árvore...");
+			r = compactar.criaFilaArvore(fila);
+			System.out.println("tempo:"+( (float) (System.currentTimeMillis() - tempoInicial)/60000));
+			//r.inOrdem();
+			//System.out.println();
+			//arquivo.guardarArquivoArvore(r);
+			//r = compactar.criarArvore(fila);
+			System.out.println("Compactando...");
+			compactar.compactarArquivoPalavra(r, arquivo.getNomeArquivo());
+			System.out.println("tempo:"+( (float) (System.currentTimeMillis() - tempoInicial)/60000));
 			break;
 		case 4: 
 			descompactar.descompactarArquivo(arquivo.getNomeArquivo());

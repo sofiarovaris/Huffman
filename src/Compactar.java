@@ -27,7 +27,7 @@ public class Compactar {
 		return fila.element();
 	}
 	
-	public void compactarArquivo(ArvoreBinaria r, String nomeArquivo) throws FileNotFoundException, IOException {
+	public void compactarArquivoCaracter(ArvoreBinaria r, String nomeArquivo) throws FileNotFoundException, IOException {
 		BitSet b = new BitSet();
 		HashMap<String, String> tabelaHash = new HashMap<String, String>();
 		File arq = new File("compactado.bin");
@@ -51,13 +51,68 @@ public class Compactar {
 			
 	        while (c != -1) {
 	        	codigo = tabelaHash.get(String.valueOf((char) c));
-	        	for(int i=0; i<codigo.length(); i++) {
-					if(codigo.charAt(i) == '0') {
-						b.set(n++,false);
-					}else {
-						b.set(n++,true);
-					}
-				}
+	        	n = adicionarSequenciaBits(codigo, b, n);
+	        	c = lerArq.read();
+	        }
+	        b.set(n, true);
+	        lerArq.close();
+	    }catch (IOException e) {}
+		try {
+			o.write(b.toByteArray());
+			o.close();
+		}catch(IOException erro) {
+			System.out.println("Erro: "+erro.getMessage());
+		}
+	}
+	
+	private int adicionarSequenciaBits(String codigo, BitSet b, int n) {
+		for(int i=0; i<codigo.length(); i++) {
+			if(codigo.charAt(i) == '0') {
+				b.set(n++,false);
+			}else {
+				b.set(n++,true);
+			}
+		}
+		return n;
+	}
+
+	public void compactarArquivoPalavra(ArvoreBinaria r, String nomeArquivo) throws FileNotFoundException, IOException {
+		BitSet b = new BitSet();
+		HashMap<String, String> tabelaHash = new HashMap<String, String>();
+		File arq = new File("compactado.bin");
+		ObjectOutputStream o = new ObjectOutputStream(new FileOutputStream(arq));
+		String codigo;
+		StringBuilder palavra = new StringBuilder();
+		
+		try {
+	        arq.delete();
+	        arq.createNewFile();
+			o.writeObject(r);			
+		}catch(IOException erro) {
+			System.out.println("Erro: "+erro.getMessage());
+	    }
+		
+		r.gerarTabelaHashCodigos(tabelaHash, "", 1);
+		
+		try {
+			int n = 0;
+	        BufferedReader lerArq = new BufferedReader(new InputStreamReader(new FileInputStream(nomeArquivo),"UTF-8"));
+			int c = lerArq.read();
+			
+	        while (c != -1) {
+	        	while(Character.isLetterOrDigit(c)){
+	        		palavra.append((char) c);
+	        		c = lerArq.read();
+	        	}
+	        	codigo = tabelaHash.get(palavra.toString());
+	        	n = adicionarSequenciaBits(codigo, b, n);
+	        	palavra.delete(0, palavra.length());
+	        	
+	        	palavra.append((char) c);
+	        	codigo = tabelaHash.get(palavra.toString());
+	        	n = adicionarSequenciaBits(codigo, b, n);
+	        	palavra.delete(0, palavra.length());
+	        	
 	        	c = lerArq.read();
 	        }
 	        b.set(n, true);
