@@ -67,14 +67,18 @@ public class Arquivo {
 	        		palavra.append((char) c);
 	        		c = lerArq.read();
 	        	}
-	        	adicionaNoFila(fila, palavra.toString());
-	        	palavra.delete(0, palavra.length());
+	        	if(!palavra.toString().equals("")) {
+	        		adicionaNoFila(fila, palavra.toString());
+		        	palavra.delete(0, palavra.length());
+	        	}
 	        	
-	        	palavra.append((char) c);
-	        	adicionaNoFila(fila, palavra.toString());
-	        	palavra.delete(0, palavra.length());
-	        	
-	        	c = lerArq.read();
+	        	if(c != -1) {
+	        		palavra.append((char) c);
+		        	adicionaNoFila(fila, palavra.toString());
+		        	palavra.delete(0, palavra.length());
+		        	
+		        	c = lerArq.read();	
+	        	}
 	        }
 	        lerArq.close();
 	    }catch (IOException e) {}

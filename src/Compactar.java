@@ -75,7 +75,7 @@ public class Compactar {
 		}
 		return n;
 	}
-
+	
 	public void compactarArquivoPalavra(ArvoreBinaria r, String nomeArquivo) throws FileNotFoundException, IOException {
 		BitSet b = new BitSet();
 		HashMap<String, String> tabelaHash = new HashMap<String, String>();
@@ -104,16 +104,21 @@ public class Compactar {
 	        		palavra.append((char) c);
 	        		c = lerArq.read();
 	        	}
-	        	codigo = tabelaHash.get(palavra.toString());
-	        	n = adicionarSequenciaBits(codigo, b, n);
-	        	palavra.delete(0, palavra.length());
 	        	
-	        	palavra.append((char) c);
-	        	codigo = tabelaHash.get(palavra.toString());
-	        	n = adicionarSequenciaBits(codigo, b, n);
-	        	palavra.delete(0, palavra.length());
+	        	if(!palavra.toString().equals("")) {
+		        	codigo = tabelaHash.get(palavra.toString());
+		        	n = adicionarSequenciaBits(codigo, b, n);
+		        	palavra.delete(0, palavra.length());
+	        	}
 	        	
-	        	c = lerArq.read();
+	        	if(c != -1) {
+	        		palavra.append((char) c);
+		        	codigo = tabelaHash.get(palavra.toString());
+		        	n = adicionarSequenciaBits(codigo, b, n);
+		        	palavra.delete(0, palavra.length());
+		        	c = lerArq.read();
+	        	}
+	        	
 	        }
 	        b.set(n, true);
 	        lerArq.close();
