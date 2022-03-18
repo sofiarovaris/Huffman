@@ -63,22 +63,20 @@ public class Arquivo {
 	        BufferedReader lerArq = new BufferedReader(new InputStreamReader(new FileInputStream(this.nomeArquivo),"UTF-8"));
 			int c = lerArq.read();
 	        while (c != -1) {
-	        	while(Character.isLetterOrDigit(c)){
+	        	if(Character.isLetterOrDigit(c)) {
 	        		palavra.append((char) c);
-	        		c = lerArq.read();
-	        	}
-	        	if(!palavra.toString().equals("")) {
+	        	}else {
 	        		adicionaNoFila(fila, palavra.toString());
 		        	palavra.delete(0, palavra.length());
+		        	
+		        	if(c != -1) {
+		        		palavra.append((char) c);
+			        	adicionaNoFila(fila, palavra.toString());
+			        	palavra.delete(0, palavra.length());
+		        	}
 	        	}
 	        	
-	        	if(c != -1) {
-	        		palavra.append((char) c);
-		        	adicionaNoFila(fila, palavra.toString());
-		        	palavra.delete(0, palavra.length());
-		        	
-		        	c = lerArq.read();	
-	        	}
+		        c = lerArq.read();
 	        }
 	        lerArq.close();
 	    }catch (IOException e) {}

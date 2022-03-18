@@ -100,25 +100,22 @@ public class Compactar {
 			int c = lerArq.read();
 			
 	        while (c != -1) {
-	        	while(Character.isLetterOrDigit(c)){
-	        		palavra.append((char) c);
-	        		c = lerArq.read();
-	        	}
 	        	
-	        	if(!palavra.toString().equals("")) {
-		        	codigo = tabelaHash.get(palavra.toString());
+	        	if(Character.isLetterOrDigit(c)) {
+	        		palavra.append((char) c);
+	        	}else {
+	        		codigo = tabelaHash.get(palavra.toString());
 		        	n = adicionarSequenciaBits(codigo, b, n);
 		        	palavra.delete(0, palavra.length());
+		        	
+		        	if(c != -1) {
+		        		palavra.append((char) c);
+			        	codigo = tabelaHash.get(palavra.toString());
+			        	n = adicionarSequenciaBits(codigo, b, n);
+			        	palavra.delete(0, palavra.length());
+		        	}
 	        	}
-	        	
-	        	if(c != -1) {
-	        		palavra.append((char) c);
-		        	codigo = tabelaHash.get(palavra.toString());
-		        	n = adicionarSequenciaBits(codigo, b, n);
-		        	palavra.delete(0, palavra.length());
-		        	c = lerArq.read();
-	        	}
-	        	
+	        	c = lerArq.read();
 	        }
 	        b.set(n, true);
 	        lerArq.close();
@@ -130,6 +127,4 @@ public class Compactar {
 			System.out.println("Erro: "+erro.getMessage());
 		}
 	}
-	
-	
 }
