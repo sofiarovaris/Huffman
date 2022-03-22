@@ -70,12 +70,14 @@ public class Huffman {
 			System.out.println("tempo:"+( (float) (System.currentTimeMillis() - tempoInicial)/60000));
 			break;
 		case 4: 
+			tempoInicial = System.currentTimeMillis();
 			descompactar.descompactarArquivo(arquivo.getNomeArquivo());
+			System.out.println("tempo:"+( (float) (System.currentTimeMillis() - tempoInicial)/60000));
 			break;
 		default:
 			throw new IllegalArgumentException("Opção inválida!");
 		}
-		System.out.println("tempo:"+( (float) (System.currentTimeMillis() - tempoInicial)/60000));
+		//System.out.println("tempo:"+( (float) (System.currentTimeMillis() - tempoInicial)/60000));
 	}
 
 }
