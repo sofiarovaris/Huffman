@@ -1,6 +1,10 @@
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.HashMap;
+
+
+/* Finalidade: Classe que contém a estrutura da árvore binária e métodos relacionados a ela.
+ * O atributo info é utilizado para armazenar o caractere ou a palavra correspondente ao nó da árvore,
+ * e o atributo freq é utilizado para armazenar a frequência dos dados.*/
 
 public class ArvoreBinaria implements Comparable<ArvoreBinaria>, Serializable{
 	private static final long serialVersionUID = 1L;
@@ -9,6 +13,9 @@ public class ArvoreBinaria implements Comparable<ArvoreBinaria>, Serializable{
 	private ArvoreBinaria esq;
 	private ArvoreBinaria dir;
 	
+	/*Finalidade: construtor para inicializar um nó da árvore binária totalmente vazio
+	 * Pré condição: nenhuma
+	 * Pós condição: nó da árvore inicializado */
 	public ArvoreBinaria() {
 		this.info = null;
 		this.freq = 0;
@@ -16,6 +23,9 @@ public class ArvoreBinaria implements Comparable<ArvoreBinaria>, Serializable{
 		this.esq = null;
 	}
 	
+	/*Finalidade: construtor para inicializar um nó da árvore binária sem filhos
+	 * Pré condição: passar a palavra ou caractere e a frequência do nó
+	 * Pós condição: nó da árvore inicializado sem filhos */
 	public ArvoreBinaria(String info, int freq) {
 		this.info = info;
 		this.freq = freq;
@@ -23,6 +33,9 @@ public class ArvoreBinaria implements Comparable<ArvoreBinaria>, Serializable{
 		this.esq = null;
 	}
 	
+	/*Finalidade: construtor para inicializar um nó da árvore binária com filhos
+	 * Pré condição: dois nós de árvore binária
+	 * Pós condição: nó da árvore inicializado com filhos */
 	public ArvoreBinaria(int freq, ArvoreBinaria esq, ArvoreBinaria dir) {
 		this.info = null;
 		this.freq = freq;
@@ -30,6 +43,9 @@ public class ArvoreBinaria implements Comparable<ArvoreBinaria>, Serializable{
 		this.esq = esq;
 	}
 	
+	/*Finalidade: adiciona os nós na árvore
+	 * Pré condição: passar a palavra ou caractere e a frequência do nó
+	 * Pós condição: árvore com o novo nó adicionado */
 	public void add(String info, int freq) {
 		if(this.info == null && this.freq == 0) {
 			this.info = info;
@@ -51,6 +67,9 @@ public class ArvoreBinaria implements Comparable<ArvoreBinaria>, Serializable{
 		}
 	}
 	
+	/*Finalidade: imprime os nós da árvore
+	 * Pré condição: nenhuma
+	 * Pós condição: nenhuma */
 	public void inOrdem() {
 		if(this.esq != null) {
 			this.esq.inOrdem();
@@ -61,6 +80,7 @@ public class ArvoreBinaria implements Comparable<ArvoreBinaria>, Serializable{
 		}
 	}
 
+	// getters e setter dos atributos da classe
 	public String getInfo() {
 		return info;
 	}
@@ -76,7 +96,11 @@ public class ArvoreBinaria implements Comparable<ArvoreBinaria>, Serializable{
 	public void setFreq(int freq) {
 		this.freq = freq;
 	}
+	// ---------------------------------------
 
+	/*Finalidade: compara as informações da ávore binária por frequência
+	 * Pré condição: ter uma árvore binária
+	 * Pós condição: nenhuma */
 	@Override
 	public int compareTo(ArvoreBinaria o) {
 		// TODO Auto-generated method stub
@@ -88,39 +112,9 @@ public class ArvoreBinaria implements Comparable<ArvoreBinaria>, Serializable{
 		return 1;
 	}
 
-	public void gerarListaBits(ArrayList<CodigoBits> codigos, String codigo) {
-		// TODO Auto-generated method stub
-		if(this.esq != null) {
-			this.esq.gerarListaBits(codigos, codigo+"0");
-		}
-		if(this.info != null) {
-			CodigoBits cb = new CodigoBits();
-			cb.setInfo(this.info);
-			cb.setCodigo(codigo);
-			codigos.add(cb);
-		}
-		if(this.dir != null) {
-			this.dir.gerarListaBits(codigos, codigo+"1");
-		}
-		
-	}
-	/*
-	public void gerarTabelaHashCodigos(HashMap<ArvoreBinaria, String> tabelaHash, String codigo) {
-		if(this.esq != null) {
-			this.esq.gerarTabelaHashCodigos(tabelaHash, codigo+"0");
-		}
-		if(this.info != null) {
-			CodigoBits cb = new CodigoBits();
-			cb.setInfo(this.info);
-			cb.setCodigo(codigo);
-			tabelaHash.put(this.freq, cb);
-		}
-		if(this.dir != null) {
-			this.dir.gerarTabelaHashCodigos(tabelaHash, codigo+"1");
-		}
-		
-	}*/
-
+	/*Finalidade: cria uma tabela hash com os códigos gerados a partir da árvore binária
+	 * Pré condição: identificar através de um inteiro (1 ou !=1) como a tabela será gerada
+	 * Pós condição: hash map com todos os códigos encontrados na árvore e seus respectivas informações */
 	public void gerarTabelaHashCodigos(HashMap<String, String> tabelaHash, String codigo, int opcao) {
 		if(this.esq != null) {
 			this.esq.gerarTabelaHashCodigos(tabelaHash, codigo+"0", opcao);

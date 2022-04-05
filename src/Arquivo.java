@@ -8,13 +8,19 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
+/*Finalidade: classe que lê os arquivos de texto*/
+
 public class Arquivo {
 	private String nomeArquivo;
 	
+	/*Finalidade: construtor da classe
+	 * Pré condição: nome do arquivo texto
+	 * Pós condição: nenhuma */
 	public Arquivo(String nomeArquivo) {
 		this.nomeArquivo = nomeArquivo;
 	}
 	
+	// getters e setters dos atributos da classe
 	public String getNomeArquivo() {
 		return nomeArquivo;
 	}
@@ -22,7 +28,12 @@ public class Arquivo {
 	public void setNomeArquivo(String nomeArquivo) {
 		this.nomeArquivo = nomeArquivo;
 	}
+	//-------------------------------------------
 	
+	/*Finalidade: le caractere por caractere do arquivo de texto, adiciona na fila e conta
+	 * a frequência dos dados
+	 * Pré condição: ter um arquivo de texto
+	 * Pós condição: fila de nós da árvore binária com suas respectivas informações*/
 	public Queue<ArvoreBinaria> leArquivoCaracter() {
 		Queue<ArvoreBinaria> fila = new LinkedList<>();
 		HashMap<String, Integer> hash = new HashMap<String, Integer>();
@@ -40,6 +51,9 @@ public class Arquivo {
 		return fila;
 	}
 	
+	/*Finalidade: adiciona na fila todos os itens contidos na tabela hash
+	 * Pré condição: hash map com os dados
+	 * Pós condição: fila com os nós da árvore binária e suas respectivas frequências*/
 	public void adicionaNoFila(HashMap<String, Integer> hash, Queue<ArvoreBinaria> fila) {
 		hash.forEach((key, value)->{
 	    	ArvoreBinaria r = new ArvoreBinaria(key, value);
@@ -47,6 +61,11 @@ public class Arquivo {
 	    });
 	}
 	
+	/*Finalidade: adiciona 1 a frequencia se aquele caractere ou palavra já existe na tabela hash,
+	 * caso nao exista, o dado é adicionado na tabela hash com frequência igual a 1
+	 * a frequência dos dados
+	 * Pré condição: tabela hash
+	 * Pós condição: tabela hash atualizada*/
 	public void contaFrequencia(HashMap<String, Integer> hash, String palavra) {
 		if(hash.get(palavra)!=null) {
     		hash.replace(palavra, hash.get(palavra)+1);
@@ -55,6 +74,10 @@ public class Arquivo {
     	}
 	}	
 
+	/*Finalidade: le caractere por caractere do arquivo de texto até encontrar uma palavra, 
+	 * adiciona na fila e conta a frequência dos dados
+	 * Pré condição: ter um arquivo de texto
+	 * Pós condição: fila de nós da árvore binária com suas respectivas informações*/
 	public Queue<ArvoreBinaria> lerArquivoPalavra() {
 		Queue<ArvoreBinaria> fila = new LinkedList<>();
 		StringBuilder palavra = new StringBuilder();

@@ -3,13 +3,21 @@ import java.io.IOException;
 import java.util.Queue;
 import java.util.Scanner;
 
+/* Programa: Huffman
+ * Finalidade: Software que faz a compactação e descompactação de arquivos de texto 
+ * utilizando o método de Huffman
+ * Desenvolvedores: Gabriel Pereira e Sofia Rovaris
+ * Data da criação: 03/03/2022 */
+
 public class Huffman {
 
 	public static void main(String[] args) throws FileNotFoundException, IOException, ClassNotFoundException{
-		// TODO Auto-generated method stub
+		
 		long tempoInicial = 0;
 		int opcao;
+		
 		Scanner ler = new Scanner(System.in);
+		
 		Compactar compactar = new Compactar();
 		Descompactar descompactar = new Descompactar();
 		
@@ -23,49 +31,45 @@ public class Huffman {
 		opcao = ler.nextInt();
 		
 		ler.close();
+		
 		Queue<ArvoreBinaria> fila;
 		ArvoreBinaria r;
 		
-		
 		switch (opcao) {
 		case 1: 
-			System.out.println("Lendo palavras...");
+			//compactação por caractere
 			tempoInicial = System.currentTimeMillis();
-			fila = arquivo.leArquivoCaracter(); 
-			System.out.println("tempo:"+( (float) (System.currentTimeMillis() - tempoInicial)/60000));
-			System.out.println("Criando árvore...");
-			tempoInicial = System.currentTimeMillis();
+			
+			fila = arquivo.leArquivoCaracter();
 			r = compactar.criaFilaArvore(fila); 
-			System.out.println("tempo:"+( (float) (System.currentTimeMillis() - tempoInicial)/60000));
-			System.out.println("Compactando...");
-			tempoInicial = System.currentTimeMillis();
 			compactar.compactarArquivoCaracter(r, arquivo.getNomeArquivo());
+			
 			System.out.println("tempo:"+( (float) (System.currentTimeMillis() - tempoInicial)/60000));
-			break;
+		break;
 		case 2: 
-			System.out.println("Descompactando por caracter...");
+			//descompactação por caractere
 			tempoInicial = System.currentTimeMillis();
+			
 			descompactar.descompactarArquivo(arquivo.getNomeArquivo());
+			
 			System.out.println("tempo:"+( (float) (System.currentTimeMillis() - tempoInicial)/60000));
 			break;
 		case 3: 
-			System.out.println("Lendo palavras...");
+			//compactação por palavra
 			tempoInicial = System.currentTimeMillis();
+			
 			fila = arquivo.lerArquivoPalavra();
-			System.out.println("tempo:"+( (float) (System.currentTimeMillis() - tempoInicial)/60000));
-			System.out.println("Criando árvore...");
-			tempoInicial = System.currentTimeMillis();
 			r = compactar.criaFilaArvore(fila);
-			System.out.println("tempo:"+( (float) (System.currentTimeMillis() - tempoInicial)/60000));
-			System.out.println("Compactando...");
-			tempoInicial = System.currentTimeMillis();
 			compactar.compactarArquivoPalavra(r, arquivo.getNomeArquivo());
+			
 			System.out.println("tempo:"+( (float) (System.currentTimeMillis() - tempoInicial)/60000));
 			break;
 		case 4: 
-			System.out.println("Descompactando por palavra...");
+			//descompactação por palavra
 			tempoInicial = System.currentTimeMillis();
+			
 			descompactar.descompactarArquivo(arquivo.getNomeArquivo());
+			
 			System.out.println("tempo:"+( (float) (System.currentTimeMillis() - tempoInicial)/60000));
 			break;
 		default:

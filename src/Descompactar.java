@@ -7,8 +7,13 @@ import java.io.OutputStreamWriter;
 import java.util.BitSet;
 import java.util.HashMap;
 
+/*Finalidade: classe para descompactar os arquivos*/
 public class Descompactar {
 
+	/*Finalidade: le a árvore binária e os bits do arquivo, e decodifica os códigos binários para
+	 * seus caracteres ou suas palavras correspondentes
+	 * Pré condição: arquivo contendo a árvore binária necessária para descompactação
+	 * Pós condição: arquivo descompactado */
 	public void descompactarArquivo(String nomeArquivo) throws ClassNotFoundException {
 		// TODO Auto-generated method stub
 		try {

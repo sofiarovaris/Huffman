@@ -12,8 +12,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Queue;
 
+/*Finalidade: classe onde é criada a árvore de frequencia e realizada a compactação dos arquivos por 
+ * caractere e por palavra*/
 public class Compactar {
 
+	/*Finalidade: criar ávore binária de acordo com a fila de frequências (Código de Huffman)
+	 * Pré condição: fila de nós da árvore ordenada por frequência
+	 * Pós condição: retorna a cabeça da árvore criada */
 	public ArvoreBinaria criaFilaArvore(Queue<ArvoreBinaria> fila) {
 		while(fila.size()>1) {
 			ArvoreBinaria x = fila.element();
@@ -27,6 +32,10 @@ public class Compactar {
 		return fila.element();
 	}
 	
+	/*Finalidade: transforma todos os caracteres do arquivo de texto em seus códigos
+	 * binários correspondentes
+	 * Pré condição: árvore binária com os dados e arquivo de texto
+	 * Pós condição: cria o arquivo 'compactado.bin' com os dados do arquivo de texto compactados */
 	public void compactarArquivoCaracter(ArvoreBinaria r, String nomeArquivo) throws FileNotFoundException, IOException {
 		BitSet b = new BitSet();
 		HashMap<String, String> tabelaHash = new HashMap<String, String>();
@@ -65,6 +74,9 @@ public class Compactar {
 		}
 	}
 	
+	/*Finalidade: adiciona ao BitSet o código binário de determinado caractere ou palavra
+	 * Pré condição: bitset e o código que será transformado em bits
+	 * Pós condição: código binário adicionado ao BitSet*/
 	private int adicionarSequenciaBits(String codigo, BitSet b, int n) {
 		for(int i=0; i<codigo.length(); i++) {
 			if(codigo.charAt(i) == '0') {
@@ -76,6 +88,10 @@ public class Compactar {
 		return n;
 	}
 	
+	/*Finalidade: transforma todas as palavras do arquivo de texto em seus códigos
+	 * binários correspondentes
+	 * Pré condição: árvore binária com os dados e arquivo de texto
+	 * Pós condição: cria o arquivo 'compactado.bin' com os dados do arquivo de texto compactados */
 	public void compactarArquivoPalavra(ArvoreBinaria r, String nomeArquivo) throws FileNotFoundException, IOException {
 		BitSet b = new BitSet();
 		HashMap<String, String> tabelaHash = new HashMap<String, String>();
