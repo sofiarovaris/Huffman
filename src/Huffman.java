@@ -29,47 +29,41 @@ public class Huffman {
 		
 		switch (opcao) {
 		case 1: 
+			System.out.println("Lendo palavras...");
 			tempoInicial = System.currentTimeMillis();
-			//System.out.println("Lendo caracteres...");
-			fila = arquivo.leArquivoCaracter(); //otimizado
-			//System.out.println("tempo:"+( (float) (System.currentTimeMillis() - tempoInicial)/60000));
-			
-			//System.out.println("Criando Fila de nós...");
-			r = compactar.criaFilaArvore(fila); //ok
-			//System.out.println("tempo:"+( (float) (System.currentTimeMillis() - tempoInicial)/60000));
-			
-			//System.out.println("Compactando..."); //ok
+			fila = arquivo.leArquivoCaracter(); 
+			System.out.println("tempo:"+( (float) (System.currentTimeMillis() - tempoInicial)/60000));
+			System.out.println("Criando árvore...");
+			tempoInicial = System.currentTimeMillis();
+			r = compactar.criaFilaArvore(fila); 
+			System.out.println("tempo:"+( (float) (System.currentTimeMillis() - tempoInicial)/60000));
+			System.out.println("Compactando...");
+			tempoInicial = System.currentTimeMillis();
 			compactar.compactarArquivoCaracter(r, arquivo.getNomeArquivo());
-			//System.out.println("tempo:"+( (float) (System.currentTimeMillis() - tempoInicial)/60000));
+			System.out.println("tempo:"+( (float) (System.currentTimeMillis() - tempoInicial)/60000));
 			break;
 		case 2: 
+			System.out.println("Descompactando por caracter...");
 			tempoInicial = System.currentTimeMillis();
-			//System.out.println("Descompactando...");
 			descompactar.descompactarArquivo(arquivo.getNomeArquivo());
-			//System.out.println("tempo:"+( (float) (System.currentTimeMillis() - tempoInicial)/60000));
+			System.out.println("tempo:"+( (float) (System.currentTimeMillis() - tempoInicial)/60000));
 			break;
 		case 3: 
-			tempoInicial = System.currentTimeMillis();
 			System.out.println("Lendo palavras...");
+			tempoInicial = System.currentTimeMillis();
 			fila = arquivo.lerArquivoPalavra();
 			System.out.println("tempo:"+( (float) (System.currentTimeMillis() - tempoInicial)/60000));
-			 
-			/*System.out.println("DEPOIS:");
-			for (ArvoreBinaria arvoreBinaria : fila) {
-				System.out.println("Caracter: "+arvoreBinaria.getInfo()+" Frequência: "+arvoreBinaria.getFreq());
-			}*/
 			System.out.println("Criando árvore...");
+			tempoInicial = System.currentTimeMillis();
 			r = compactar.criaFilaArvore(fila);
 			System.out.println("tempo:"+( (float) (System.currentTimeMillis() - tempoInicial)/60000));
-			//r.inOrdem();
-			//System.out.println();
-			//arquivo.guardarArquivoArvore(r);
-			//r = compactar.criarArvore(fila);
 			System.out.println("Compactando...");
+			tempoInicial = System.currentTimeMillis();
 			compactar.compactarArquivoPalavra(r, arquivo.getNomeArquivo());
 			System.out.println("tempo:"+( (float) (System.currentTimeMillis() - tempoInicial)/60000));
 			break;
 		case 4: 
+			System.out.println("Descompactando por palavra...");
 			tempoInicial = System.currentTimeMillis();
 			descompactar.descompactarArquivo(arquivo.getNomeArquivo());
 			System.out.println("tempo:"+( (float) (System.currentTimeMillis() - tempoInicial)/60000));
@@ -77,7 +71,6 @@ public class Huffman {
 		default:
 			throw new IllegalArgumentException("Opção inválida!");
 		}
-		//System.out.println("tempo:"+( (float) (System.currentTimeMillis() - tempoInicial)/60000));
 	}
 
 }
