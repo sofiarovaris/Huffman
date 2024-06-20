@@ -1,31 +1,31 @@
 # Huffman
 
-Este projeto foi desenvolvido como parte da disciplina de Projeto e Análise de Algoritmos da faculdade. O objetivo do projeto era implementar o algoritmo de compressão de Huffman para compactar e descompactar arquivos. 
+This project was developed as part of the Algorithms Project and Analysis course in college. The goal of the project was to implement the Huffman compression algorithm to compress and decompress files.
 
-## Funcionalidades
+## Features
 
-- Compactação de arquivos por palavras;
-- Compactação de arquivos por caracteres;
-- Descompactação de arquivos por palavras;
-- Descompactação de arquivos por caracteres;
+- File compression by words;
+- File compression by characters;
+- File decompression by words;
+- File decompression by characters;
 
-## Tecnologias Utilizadas
+## Technologies Used
 
-- **Linguagem de Programação**: Java
-- **Ambiente de Desenvolvimento**: Visual Studio Code (VSCode)
-- **Gerenciamento de Dependências**: Maven
+- **Programming Language**: Java
+- **Development Environment**: Visual Studio Code (VSCode)
+- **Dependency Management**: Maven
 
-## Como Executar
+## How to Run
 
-1. **Clonar o Repositório**
+1. **Clone the Repository**
     ```bash
     git clone https://github.com/sofiarovaris/Huffman.git
     ```
 
-2. **Abrir o Projeto no VSCode**
-    - Abra o Visual Studio Code.
-    - Vá em `File` > `Open Folder...` e selecione a pasta do projeto clonada.
+2. **Open the Project in VSCode**
+    - Open Visual Studio Code.
+    - Go to `File` > `Open Folder...` and select the cloned project folder.
 
-3. **Compilar e Executar o Projeto**
-    - Compile o projeto clicando no ícone de compilar na barra lateral ou usando o atalho `Ctrl+Shift+B`.
-    - Execute o projeto clicando no ícone de execução ou usando o atalho `F5`.
+3. **Compile and Run the Project**
+    - Compile the project by clicking on the compile icon in the sidebar or using the shortcut `Ctrl+Shift+B`.
+    - Run the project by clicking on the run icon or using the shortcut `F5`.
