@@ -19,8 +19,7 @@ Este projeto foi desenvolvido como parte da disciplina de Projeto e Análise de 
 
 1. **Clonar o Repositório**
     ```bash
-    git clone [https://github.com/seu-usuario/seu-repositorio.git
-    cd seu-repositorio](https://github.com/sofiarovaris/Huffman.git)
+    git clone https://github.com/sofiarovaris/Huffman.git
     ```
 
 2. **Abrir o Projeto no VSCode**
