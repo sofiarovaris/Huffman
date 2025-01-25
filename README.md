@@ -1,6 +1,6 @@
 # Huffman
 
-This project was developed as part of the Algorithms Project and Analysis course in college. The goal of the project was to implement the Huffman compression algorithm to compress and decompress files.
+This project was developed as part of a freelance project for a company that needed to incorporate a compression and decompression algorithm into their system. The goal was to implement the Huffman compression algorithm to enable file compression and decompression.
 
 ## Features
 
